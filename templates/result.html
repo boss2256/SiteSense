@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card shadow-lg p-5" style="width: 100%; max-width: 600px; border-radius: 15px;">
+        <h2 class="text-center mb-4" style="font-weight: 600; color: #333;">Prediction Result</h2>
+
+        <div class="mb-4">
+            <p><strong>URL:</strong> <a href="{{ url }}" target="_blank" style="color: #007bff;">{{ url }}</a></p>
+            <p><strong>Predicted Class:</strong>
+                <span class="badge badge-primary p-2" style="font-size: 1rem; background-color: {% if predicted_class == 'Phishing' %}#ff4d4d{% else %}#28a745{% endif %};">
+                    {{ predicted_class }}
+                </span>
+            </p>
+            <p><strong>Confidence:</strong> <span style="color: #555;">{{ confidence_score }}</span></p>
+        </div>
+
+        <h3 style="font-size: 1.25rem; font-weight: 600; color: #333;">GeoIP Information</h3>
+        <ul class="list-unstyled">
+            <li><strong>Country:</strong> {{ geoip_info['country'] or 'Unknown' }}</li>
+            <li><strong>Region:</strong> {{ geoip_info['region'] or 'Unknown' }}</li>
+            <li><strong>City:</strong> {{ geoip_info['city'] or 'Unknown' }}</li>
+        </ul>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('home') }}" class="btn btn-secondary" style="background-color: #343a40; border: none; border-radius: 10px; padding: 10px 20px;">Check Another URL</a>
+        </div>
+
+        <footer class="text-center mt-4" style="font-size: 14px; color: #aaa;">
+            © 2024 SiteSense - Website Legitimacy Detection
+        </footer>
+    </div>
+</div>
+{% endblock %}

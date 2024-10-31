@@ -1,0 +1,11 @@
+# Ignore virtual environment
+website_legitimacy_env/
+
+# Ignore logs and cache files
+*.log
+__pycache__/
+
+# Ignore environment files
+.env
+
+models/website_legitimacy_model.pkl

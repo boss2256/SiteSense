@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 500px; border-radius: 15px;">
+        <h1 class="text-center mb-4" style="font-weight: 600; color: #333;">SiteSense: Website Legitimacy Detection</h1>
+
+        <!-- Form to check website legitimacy -->
+        <form id="legitimacyForm" action="{{ url_for('predict') }}" method="post" class="mt-4" onsubmit="showLoading(); return false;">
+            <div class="form-group mb-3">
+                <label for="url" class="form-label" style="color: #555;">Enter Website URL:</label>
+                <input type="text" name="url" id="url" placeholder="e.g., https://example.com" class="form-control" style="border-radius: 10px; padding: 10px;" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" style="border-radius: 10px; background: linear-gradient(90deg, #007bff, #0056b3); border: none; font-weight: bold;">
+                Check Legitimacy
+            </button>
+        </form>
+
+        <!-- Loading spinner (hidden initially) -->
+        <div id="loadingSpinner" class="text-center mt-4" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Processing...</span>
+            </div>
+            <p class="mt-2" style="color: #555;">Please wait, processing...</p>
+        </div>
+
+        <footer class="text-center mt-4" style="font-size: 14px; color: #aaa;">
+            © 2024 SiteSense - Website Legitimacy Detection
+        </footer>
+    </div>
+</div>
+
+<script>
+    function showLoading() {
+        document.getElementById("loadingSpinner").style.display = "block";
+        setTimeout(function() {
+            document.getElementById("legitimacyForm").submit();
+        }, 2000);
+    }
+</script>
+{% endblock %}

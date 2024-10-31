@@ -1,0 +1,7 @@
+flask
+pycaret
+pandas
+scikit-learn
+joblib
+geoip2  # For GeoIP lookups
+gunicorn  # If deploying on a server
