@@ -16,9 +16,15 @@ The model was trained using the [Malicious URLs Dataset](https://www.kaggle.com/
    - The URLs were preprocessed to extract relevant features such as the URL length, number of special characters, digit count, letter count, and whether the protocol is HTTPS.
    - A "cleaned" URL field was created by removing parts like `www` to standardize URLs for further similarity checks.
 
-2. **Feature Engineering**:
-   - **Length and Structure-Based Features**: Features like URL length, special character count, digit count, and letter count were utilized to distinguish legitimate sites from phishing attempts, as these often vary between types of URLs.
-   - **Domain Similarity Checking**: Trusted domains (e.g., `facebook.com`, `google.com`) were flagged with high confidence as benign, and similarity checks (using Levenshtein distance) were employed to detect common typos or modifications often found in phishing attempts (e.g., `facebo0k.com` instead of `facebook.com`).
+## Feature Engineering
+
+1. **Length and Structure-Based Features**: 
+   - Features such as URL length, special character count, digit count, and letter count were employed to distinguish legitimate sites from phishing attempts. Phishing URLs often exhibit unique structural traits that differ from legitimate URLs.
+
+2. **Domain Trust and Similarity Checks**:
+   - Trusted domains (e.g., `facebook.com`, `google.com`) were flagged with high confidence as benign, based on a manually specified list of known legitimate domains.
+   - *Note*: In this initial version, similarity checks for typos or domain variations (like `facebo0k.com` for `facebook.com`) were not incorporated. Implementing Levenshtein distance or a similar method could enhance detection of such common phishing techniques in future iterations.
+
 
 3. **Model Selection**:
    - After experimentation, a supervised classification algorithm was chosen, and the model was trained on the dataset, with emphasis on maximizing accuracy and minimizing false positives and false negatives.
@@ -45,9 +51,21 @@ The model combines a machine learning-based classification model with rule-based
 
 ## Future Improvements
 
-1. **Enhanced Domain Checking**: Implementing additional similarity checks to detect common phishing patterns more effectively.
-2. **Improving Dataset**: Including a broader dataset of legitimate websites to reduce false positives.
-3. **Feature Engineering**: Exploring additional features such as domain age, hosting information, and WHOIS data for a more comprehensive detection model.
+1. **Enhanced Domain Similarity Checking**: 
+   - Implement Levenshtein distance or other string similarity measures to detect subtle domain typos commonly used in phishing (e.g., `facebo0k.com` vs. `facebook.com`).
+   - Integrate trusted domain verification to flag known benign sites more accurately.
+
+2. **Robust Dataset Expansion**:
+   - Use API-based phishing and legitimate website datasets, such as those from online threat intelligence platforms, to ensure a more comprehensive and up-to-date data source.
+   - Include a diverse dataset of legitimate websites, especially popular but lesser-known sites, to minimize false positives and improve model robustness.
+
+3. **Advanced Feature Engineering**:
+   - Consider incorporating additional URL features such as domain age, registrar information, and WHOIS data, which can provide insights into the legitimacy of the site.
+   - Integrate domain reputation scores and hosting information to further distinguish between benign and phishing websites.
+
+4. **Automated Model Retraining**:
+   - Set up periodic data updates and model retraining to adapt to evolving phishing techniques and ensure the classifier remains effective against new threats.
+
 
 ## Usage
 
